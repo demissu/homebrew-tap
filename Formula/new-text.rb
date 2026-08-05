@@ -9,7 +9,10 @@ class NewText < Formula
   def install
     libexec.install Dir["*"]
 
-    bin.write_exec_script libexec/"install.sh"
+    (bin/"new-text").write <<~SH
+  #!/bin/bash
+  exec "#{libexec}/install.sh" "$@"
+  SH
   end
 
   def caveats
